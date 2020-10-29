@@ -42,3 +42,12 @@ class Clientes():
         except:
             print('Error módulo escribir valido DNI')
             return None
+
+    def selSexo():
+        try:
+            if var.ui.rbtFem.isChecked():
+                print('Has elegido femenino')
+            if var.ui.rbtMasc.isChecked():
+                print('Has elegido masculino')
+        except Exception as error:
+            print('Error: %s ' % str(error))
