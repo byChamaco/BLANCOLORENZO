@@ -61,7 +61,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>250</y>
+      <y>300</y>
       <width>741</width>
       <height>20</height>
      </rect>
@@ -135,7 +135,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
      <rect>
       <x>440</x>
       <y>140</y>
-      <width>71</width>
+      <width>51</width>
       <height>41</height>
      </rect>
     </property>
@@ -155,7 +155,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
      <rect>
       <x>490</x>
       <y>150</y>
-      <width>241</width>
+      <width>251</width>
       <height>20</height>
      </rect>
     </property>
@@ -164,7 +164,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>280</y>
+      <y>330</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -177,7 +177,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <property name="geometry">
      <rect>
       <x>420</x>
-      <y>280</y>
+      <y>330</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -212,7 +212,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>190</y>
+      <y>240</y>
       <width>71</width>
       <height>41</height>
      </rect>
@@ -232,7 +232,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>200</y>
+      <y>250</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -245,7 +245,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>200</y>
+      <y>250</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -258,7 +258,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>190</y>
+      <y>240</y>
       <width>131</width>
       <height>41</height>
      </rect>
@@ -278,7 +278,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <property name="geometry">
      <rect>
       <x>490</x>
-      <y>190</y>
+      <y>240</y>
       <width>71</width>
       <height>41</height>
      </rect>
@@ -291,7 +291,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>190</y>
+      <y>240</y>
       <width>71</width>
       <height>41</height>
      </rect>
@@ -304,13 +304,73 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>190</y>
+      <y>240</y>
       <width>91</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
      <string>Transferencia</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblDireccion">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>190</y>
+      <width>71</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Dirección:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="editDireccion">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>200</y>
+      <width>311</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblProv">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>190</y>
+      <width>71</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Provincia:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cmbProv">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>200</y>
+      <width>211</width>
+      <height>22</height>
+     </rect>
     </property>
    </widget>
   </widget>
