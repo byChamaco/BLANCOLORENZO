@@ -4,10 +4,13 @@ class Eventos():
     def Salir(self):
         '''
         módulo para cerrar el programa
-        :return:
         '''
         try:
-            sys.exit()
+            var.avisoSalir.show()
+            if var.avisoSalir.exec_():
+                sys.exit()
+            else:
+                var.avisoSalir.close()
         except Exception as error:
             print('Error %s' % str(error))
 

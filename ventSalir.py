@@ -14,13 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_ventSalir(object):
     def setupUi(self, ventSalir):
         ventSalir.setObjectName("ventSalir")
-        ventSalir.resize(415, 175)
+        ventSalir.resize(415, 167)
         ventSalir.setModal(True)
-        self.btnBox = QtWidgets.QDialogButtonBox(ventSalir)
-        self.btnBox.setGeometry(QtCore.QRect(130, 110, 161, 32))
-        self.btnBox.setOrientation(QtCore.Qt.Horizontal)
-        self.btnBox.setStandardButtons(QtWidgets.QDialogButtonBox.No|QtWidgets.QDialogButtonBox.Yes)
-        self.btnBox.setObjectName("btnBox")
+        self.btnBoxSalir = QtWidgets.QDialogButtonBox(ventSalir)
+        self.btnBoxSalir.setGeometry(QtCore.QRect(130, 110, 161, 32))
+        self.btnBoxSalir.setOrientation(QtCore.Qt.Horizontal)
+        self.btnBoxSalir.setStandardButtons(QtWidgets.QDialogButtonBox.No|QtWidgets.QDialogButtonBox.Yes)
+        self.btnBoxSalir.setObjectName("btnBoxSalir")
         self.lblMenSAlir = QtWidgets.QLabel(ventSalir)
         self.lblMenSAlir.setGeometry(QtCore.QRect(100, 40, 301, 31))
         font = QtGui.QFont()
@@ -33,18 +33,17 @@ class Ui_ventSalir(object):
         self.lblImgSalir = QtWidgets.QLabel(ventSalir)
         self.lblImgSalir.setGeometry(QtCore.QRect(-10, 30, 111, 51))
         self.lblImgSalir.setText("")
-        self.lblImgSalir.setPixmap(QtGui.QPixmap("img/iconoAviso.png"))
+        self.lblImgSalir.setPixmap(QtGui.QPixmap(":/avisoSalir/iconoAviso.png"))
         self.lblImgSalir.setScaledContents(True)
         self.lblImgSalir.setAlignment(QtCore.Qt.AlignCenter)
         self.lblImgSalir.setObjectName("lblImgSalir")
 
         self.retranslateUi(ventSalir)
-        self.btnBox.accepted.connect(ventSalir.accept)
-        self.btnBox.rejected.connect(ventSalir.reject)
+        self.btnBoxSalir.accepted.connect(ventSalir.accept)
+        self.btnBoxSalir.rejected.connect(ventSalir.reject)
         QtCore.QMetaObject.connectSlotsByName(ventSalir)
 
     def retranslateUi(self, ventSalir):
         _translate = QtCore.QCoreApplication.translate
         ventSalir.setWindowTitle(_translate("ventSalir", "Salir"))
         self.lblMenSAlir.setText(_translate("ventSalir", "¿Está seguro que desea salir de la aplicación?"))
-import avisoSalir_rc

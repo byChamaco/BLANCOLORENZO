@@ -62,3 +62,6 @@ class Clientes():
                 print('Pagas con transferencia')
         except Exception as error:
             print('Error: %s ' % str(error))
+
+    def cargarFecha(self):
+        print('Hola')
