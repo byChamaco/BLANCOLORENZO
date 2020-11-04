@@ -455,7 +455,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
   </action>
  </widget>
  <resources>
-  <include location="img/calendar.qrc"/>
+  <include location="img/avisoSalir.qrc"/>
  </resources>
  <connections/>
 </ui>

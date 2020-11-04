@@ -201,3 +201,4 @@ class Ui_ventPrincipal(object):
         self.menuArchivo.setTitle(_translate("ventPrincipal", "Archivo"))
         self.actionSalir.setText(_translate("ventPrincipal", "Salir"))
         self.actionSalir.setShortcut(_translate("ventPrincipal", "Alt+S"))
+import avisoSalir_rc

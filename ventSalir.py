@@ -47,3 +47,4 @@ class Ui_ventSalir(object):
         _translate = QtCore.QCoreApplication.translate
         ventSalir.setWindowTitle(_translate("ventSalir", "Salir"))
         self.lblMenSAlir.setText(_translate("ventSalir", "¿Está seguro que desea salir de la aplicación?"))
+import avisoSalir_rc
