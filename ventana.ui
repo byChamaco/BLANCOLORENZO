@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>716</width>
-    <height>618</height>
+    <width>784</width>
+    <height>630</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
           <item row="7" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_15">
             <item>
-             <widget class="QPushButton" name="btnAceptar_3">
+             <widget class="QPushButton" name="btnAceptar">
               <property name="enabled">
                <bool>true</bool>
               </property>
@@ -46,7 +46,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="btnSalir_3">
+             <widget class="QPushButton" name="btnSalir">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -63,7 +63,7 @@
           <item row="4" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_14">
             <item>
-             <widget class="QLabel" name="lblSexo_3">
+             <widget class="QLabel" name="lblSexo">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
@@ -77,21 +77,27 @@
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="rbtFem_3">
+             <widget class="QRadioButton" name="rbtFem">
               <property name="text">
                <string>Femenino</string>
               </property>
+              <attribute name="buttonGroup">
+               <string notr="true">grpbtnSex</string>
+              </attribute>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="rbtMasc_3">
+             <widget class="QRadioButton" name="rbtMasc">
               <property name="text">
                <string>Masculino</string>
               </property>
+              <attribute name="buttonGroup">
+               <string notr="true">grpbtnSex</string>
+              </attribute>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblPago_3">
+             <widget class="QLabel" name="lblPago">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
@@ -105,21 +111,21 @@
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="chkEfec_3">
+             <widget class="QCheckBox" name="chkEfec">
               <property name="text">
                <string>Efectivo</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="chkTarj_3">
+             <widget class="QCheckBox" name="chkTarj">
               <property name="text">
                <string>Tarjeta</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="chkTrans_3">
+             <widget class="QCheckBox" name="chkTrans">
               <property name="text">
                <string>Transferencia</string>
               </property>
@@ -137,7 +143,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblXesCli_6">
+             <widget class="QLabel" name="lblXesCli_2">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -184,7 +190,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
               <item row="0" column="0">
-               <widget class="QTableWidget" name="tablaCli_3">
+               <widget class="QTableWidget" name="tablaCli">
                 <column>
                  <property name="text">
                   <string>DNI</string>
@@ -240,7 +246,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
           <item row="3" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
             <item>
-             <widget class="QLabel" name="lblDireccion_3">
+             <widget class="QLabel" name="lblDireccion">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
@@ -254,10 +260,10 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="editDireccion_3"/>
+             <widget class="QLineEdit" name="editDir"/>
             </item>
             <item>
-             <widget class="QLabel" name="lblProv_3">
+             <widget class="QLabel" name="lblProv">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
@@ -271,14 +277,14 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="cmbProv_3"/>
+             <widget class="QComboBox" name="cmbProv"/>
             </item>
            </layout>
           </item>
           <item row="0" column="0">
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
-             <widget class="QLabel" name="lblXesCli_5">
+             <widget class="QLabel" name="lblXesCli">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -322,7 +328,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
           <item row="2" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
-             <widget class="QLabel" name="lblApellidos_3">
+             <widget class="QLabel" name="lblApellidos">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
@@ -336,10 +342,10 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="editApel_3"/>
+             <widget class="QLineEdit" name="editApel"/>
             </item>
             <item>
-             <widget class="QLabel" name="lblNombre_3">
+             <widget class="QLabel" name="lblNombre">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
@@ -359,7 +365,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="editNombre_3">
+             <widget class="QLineEdit" name="editNombre">
               <property name="alignment">
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
               </property>
@@ -370,7 +376,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
           <item row="1" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_11">
             <item>
-             <widget class="QLabel" name="lblDni_3">
+             <widget class="QLabel" name="lblDni">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
@@ -384,7 +390,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="editDni_3">
+             <widget class="QLineEdit" name="editDni">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -394,7 +400,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblValidar_3">
+             <widget class="QLabel" name="lblValidar">
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
@@ -410,7 +416,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblFecha_3">
+             <widget class="QLabel" name="lblFecha">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
@@ -427,7 +433,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="editCliAlta_3">
+             <widget class="QLineEdit" name="editClialta">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -437,7 +443,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="btnCalendar_3">
+             <widget class="QPushButton" name="btnCalendar">
               <property name="text">
                <string/>
               </property>
@@ -582,7 +588,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>716</width>
+     <width>784</width>
      <height>21</height>
     </rect>
    </property>
@@ -608,4 +614,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
   <include location="img/avisoSalir.qrc"/>
  </resources>
  <connections/>
+ <buttongroups>
+  <buttongroup name="grpbtnSex"/>
+ </buttongroups>
 </ui>

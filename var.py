@@ -6,3 +6,4 @@ global dlgcalendar
 global sex
 global vpro
 pay = []
+filebd = 'emresa.db'

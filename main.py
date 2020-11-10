@@ -2,7 +2,7 @@ from ventana import *
 from ventSalir import *
 from ventCalendar import *
 from datetime import datetime
-import sys, var, events, clients
+import sys, var, events, clients, conexion
 
 
 class DialogSalir(QtWidgets.QDialog):
@@ -22,7 +22,7 @@ class DialogCalendar(QtWidgets.QDialog):
         diactual = datetime.now().day
         mesactual = datetime.now().month
         anoactual = datetime.now().year
-        var.dlgcalendar.Calendar.setSelectedDate(QtCore.QDate(anoactual, mesactual, diactual))
+        var.dlgcalendar.Calendar.setSelectedDate((QtCore.QDate(anoactual, mesactual, diactual)))
         var.dlgcalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
 
 class Main(QtWidgets.QMainWindow):
@@ -30,13 +30,13 @@ class Main(QtWidgets.QMainWindow):
         super(Main, self).__init__()
         var.ui = Ui_ventPrincipal()
         var.ui.setupUi(self)
+        var.avisoSalir = DialogSalir()
+        var.dlgcalendar = DialogCalendar()
         '''
         colección de datos
         '''
         var.rbtsex = (var.ui.rbtFem, var.ui.rbtMasc)
         var.chkPago = (var.ui.chkEfec, var.ui.chkTarj, var.ui.chkTrans)
-        var.avisoSalir = DialogSalir()
-        var.dlgcalendar = DialogCalendar()
         '''
         conexión de eventos con los objetos
         estamos conectando el código con la interfaz gráfica
@@ -50,8 +50,17 @@ class Main(QtWidgets.QMainWindow):
             i.toggled.connect(clients.Clientes.selSexo)
         for i in var.chkPago:
             i.stateChanged.connect(clients.Clientes.selPago)
-        clients.Clientes.cargarProv()
         var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
+        var.ui.tablaCli.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        '''
+        Lamada a módulos iniciales
+        '''
+        events.Eventos.cargarProv()
+
+        '''
+        módulos del principal
+        '''
+        conexion.Conexion.db_connect(var.filebd)
 
     def closeEvent(self, event):
         events.Eventos.Salir(event)
