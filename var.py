@@ -6,4 +6,5 @@ global dlgcalendar
 global sex
 global vpro
 pay = []
-filebd = 'emresa.db'
+filebd = 'empresa.db'
+global DATABASE

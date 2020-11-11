@@ -1,4 +1,3 @@
-from PyQt5 import QtWidgets
 import var
 from ventana import *
 
@@ -59,12 +58,15 @@ class Clientes():
 
     def selPago():
         try:
-            if var.ui.chkEfec.isChecked():
-                var.pay.append('Efectivo')
-            if var.ui.chkTarj.isChecked():
-                var.pay.append('Tarjeta')
-            if var.ui.chkTrans.isChecked():
-                var.pay.append('Transferencia')
+            var.pay = []
+            for i, data in enumerate(var.ui.grpbtnPay.button()):
+                if data.isChecked() and i == 0:
+                    var.pay.append('Efectivo')
+                if data.isChecked() and i == 1:
+                    var.pay.append('Tarjeta')
+                if data.isChecked() and i == 2:
+                    var.pay.append('Transferencia')
+            return var.pay
         except Exception as error:
             print('Error: %s' % str(error))
 
@@ -112,21 +114,23 @@ class Clientes():
                     clitab.append(i.text())
                     k += 1
             newcli.append(vpro)
-            var.pay = set(var.pay)    #eliminia duplicados
-            for j in var.pay:
-                newcli.append(j)
+            var.pay2 = Clientes.selPago()    #eliminia duplicados
             newcli.append(var.sex)
+            newcli.append(var.pay2)
+            if client:
             #aquí empieza como trabajar con la TableWidget
-            row = 0
-            column = 0
-            var.ui.tablaCli.insertRow(row)
-            for registro in clitab:
-                cell = QtWidgets.QTableWidgetItem(registro)
-                var.ui.tablaCli.setItem(row, column, cell)
-                column +=1
-            Clientes.limpiarCli(client, var.rbtsex, var.chkPago)
+                row = 0
+                column = 0
+                var.ui.tablaCli.insertRow(row)
+                for registro in clitab:
+                    cell = QtWidgets.QTableWidgetItem(registro)
+                    var.ui.tablaCli.setItem(row, column, cell)
+                    column +=1
+                Clientes.limpiarCli(client, var.rbtsex, var.chkPago)
+            else:
+                print('Faltan Datos')
         except Exception as error:
-            print('Error cargar fecha: %s ' % str(error))
+            print('Error showClientes: %s ' % str(error))
 
     def limpiarCli(listaeditCli, listaRbtsex, listaChkpay):
         '''
@@ -146,7 +150,7 @@ class Clientes():
             var.ui.cmbProv.setCurrentIndex(0)
             var.ui.lblValidar.setText('')
         except Exception as error:
-            print('Error cargar fecha: %s ' % str(error))
+            print('Error cargar limpiarCli: %s ' % str(error))
 
     def cargarCli(self):
         try:
@@ -159,4 +163,4 @@ class Clientes():
             for i, dato in enumerate(client):
                 dato.setText(fila[i])
         except Exception as error:
-            print('Error cargar fecha: %s ' % str(error))
+            print('Error cargar cliente: %s ' % str(error))
