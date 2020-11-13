@@ -45,7 +45,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.editDni.editingFinished.connect(clients.Clientes.validoDni)
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
-        var.ui.btnAceptar.clicked.connect(clients.Clientes.showClientes)
+        var.ui.btnAltaCli.clicked.connect(clients.Clientes.altaClientes)
+        var.ui.btnLimpiarCli.clicked.connect(clients.Clientes.limpiarCli)
         for i in var.rbtsex:
             i.toggled.connect(clients.Clientes.selSexo)
         for i in var.chkPago:
@@ -62,6 +63,7 @@ class Main(QtWidgets.QMainWindow):
         módulos del principal
         '''
         conexion.Conexion.db_connect(var.filebd)
+        #conexion.Conexion()
 
     def closeEvent(self, event):
         events.Eventos.Salir(event)

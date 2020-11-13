@@ -59,7 +59,7 @@ class Clientes():
     def selPago():
         try:
             var.pay = []
-            for i, data in enumerate(var.ui.grpbtnPay.button()):
+            for i, data in enumerate(var.ui.grpbtnPay.buttons()):
                 if data.isChecked() and i == 0:
                     var.pay.append('Efectivo')
                 if data.isChecked() and i == 1:
@@ -97,7 +97,7 @@ class Clientes():
         except Exception as error:
             print('Error cargar fecha: %s ' % str(error))
 
-    def showClientes(vpro):
+    def altaClientes(vpro):
         '''
         cargará los clientes en la tabla
         :return: none
@@ -132,7 +132,7 @@ class Clientes():
         except Exception as error:
             print('Error showClientes: %s ' % str(error))
 
-    def limpiarCli(listaeditCli, listaRbtsex, listaChkpay):
+    def limpiarCli():
         '''
         limpia los datos del formulario cliente
         :param listaRbtsex:
@@ -140,17 +140,19 @@ class Clientes():
         :return: none
         '''
         try:
-            for i in range(len(listaeditCli)):
-                listaeditCli[i].setText('')
-            var.ui.grpbtnSex.setExclusive(False) #necesario para los radiobutton
-            for dato in listaRbtsex:
+            client = [var.ui.editDni, var.ui.editApel, var.ui.editNombre, var.ui.editClialta, var.ui.editDir]
+            for i in range(len(client)):
+                client[i].setText('')
+            var.ui.grpbtnSex.setExclusive(False)  # necesario para los radiobutton
+            for dato in var.rbtsex:
                 dato.setChecked(False)
-            for data in listaChkpay:
+            for data in var.chkPago:
                 data.setChecked(False)
             var.ui.cmbProv.setCurrentIndex(0)
             var.ui.lblValidar.setText('')
+            var.ui.lblCodCli.setText('')
         except Exception as error:
-            print('Error cargar limpiarCli: %s ' % str(error))
+            print('Error limpiar widgets: %s ' % str(error))
 
     def cargarCli(self):
         try:
