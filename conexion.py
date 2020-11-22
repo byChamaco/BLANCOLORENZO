@@ -1,5 +1,4 @@
 from PyQt5 import QtWidgets, QtSql
-import pymongo, var
 from ventana import *
 
 class Conexion():
