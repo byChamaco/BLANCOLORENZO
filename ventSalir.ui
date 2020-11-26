@@ -79,7 +79,7 @@
   </widget>
  </widget>
  <resources>
-  <include location="img/calendar.qrc"/>
+  <include location="img/avisoSalir.qrc"/>
   <include location="img/avisoSalir.qrc"/>
  </resources>
  <connections>

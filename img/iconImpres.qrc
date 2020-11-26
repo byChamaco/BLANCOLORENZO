@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="iconImpres">
+    <file>iconImpres.png</file>
+  </qresource>
+</RCC>
