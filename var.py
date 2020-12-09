@@ -1,10 +1,18 @@
 global ui
-global rbtsex
-global chkPago
-global avisoSalir
+global dlgsalir
 global dlgcalendar
+global filedlgabrir
+global alta
+global baja
+global salir
+global lblMensalir
+global dlgaviso
+
+global rbtsex
+global chkpago
 global sex
-global vpro
 pay = []
+pay2 = []
+
 filebd = 'empresa.db'
 global DATABASE

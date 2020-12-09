@@ -497,7 +497,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QLabel" name="lblCodCli">
+           <widget class="QLabel" name="lblCodcli">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>25</horstretch>
@@ -788,7 +788,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
            </widget>
           </item>
           <item row="0" column="5">
-           <widget class="QSpinBox" name="spinBox">
+           <widget class="QSpinBox" name="spinEdad">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -949,6 +949,8 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <property name="title">
      <string>Archivo</string>
     </property>
+    <addaction name="actionAbrir"/>
+    <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
    <addaction name="menuArchivo"/>
@@ -969,8 +971,8 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
    </attribute>
    <addaction name="toolbarCarpeta"/>
    <addaction name="toolbarImpresora"/>
-   <addaction name="toolbarBackUp"/>
-   <addaction name="ToolbarSalir"/>
+   <addaction name="toolbarBackup"/>
+   <addaction name="toolbarSalir"/>
   </widget>
   <action name="actionSalir">
    <property name="text">
@@ -980,7 +982,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <string>Alt+S</string>
    </property>
   </action>
-  <action name="toolbarBackUp">
+  <action name="toolbarBackup">
    <property name="checkable">
     <bool>false</bool>
    </property>
@@ -996,7 +998,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/BackUp/backup.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </action>
-  <action name="ToolbarSalir">
+  <action name="toolbarSalir">
    <property name="icon">
     <iconset>
      <activeon>:/toolbarSalir/iconsalir.png</activeon>
@@ -1033,6 +1035,11 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
    </property>
    <property name="toolTip">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/iconImpres/iconImpres.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionAbrir">
+   <property name="text">
+    <string>Abrir</string>
    </property>
   </action>
  </widget>

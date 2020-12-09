@@ -16,7 +16,7 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QLabel" name="lblMenSAlir">
+  <widget class="QLabel" name="lblMensalir">
    <property name="geometry">
     <rect>
      <x>100</x>
