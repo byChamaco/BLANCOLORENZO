@@ -24,7 +24,7 @@ class Clientes():
                 return len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni)%23 ] == dig_control
 
         except Exception as error:
-            print('Error módulo validar DNI')
+            print('Error módulo validar DNI %s' % str(error))
             return None
 
     def validoDni():
@@ -106,7 +106,7 @@ class Clientes():
         except Exception as error:
             print('Error cargar fecha: %s ' % str(error))
 
-    def altaClientes():
+    def altaClientes(self):
         '''
         cargará los clientes en la tabla
         :return: none
@@ -140,6 +140,8 @@ class Clientes():
                 conexion.Conexion.altaCli(newcli)
             else:
                 print('Faltan Datos')
+                conexion.Conexion.mostrarClientes(None)
+                Clientes.limpiarCli()
         except Exception as error:
             print('Error showClientes: %s ' % str(error))
 
@@ -165,13 +167,12 @@ class Clientes():
         except Exception as error:
             print('Error limpiar widgets: %s ' % str(error))
 
-    def cargarCli(self):
+    def cargarCli():
         try:
             fila = var.ui.tablaCli.selectedItems()
             client = [var.ui.editDni, var.ui.editApel, var.ui.editNombre]
             if fila:
                 fila = [dato.text() for dato in fila]
-            print(fila)
             i = 0
             for i, dato in enumerate(client):
                 dato.setText(fila[i])
@@ -187,9 +188,9 @@ class Clientes():
         try:
             dni = var.ui.editDni.text()
             conexion.Conexion.bajaCli(dni)
-            conexion.Conexion.mostrarClientes(None)
             Clientes.limpiarCli()
             var.dlgaviso.hide()
+            conexion.Conexion.mostrarClientes(None)
         except Exception as error:
             print('Error ventana baja cliente: %s ' % str(error))
 

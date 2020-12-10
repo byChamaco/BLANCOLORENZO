@@ -953,7 +953,22 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
     <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
+   <widget class="QMenu" name="menuInformes">
+    <property name="title">
+     <string>Informes</string>
+    </property>
+    <addaction name="menubarReportCli"/>
+    <addaction name="actionImprimir_Factura"/>
+    <addaction name="actionListado_Productos"/>
+   </widget>
+   <widget class="QMenu" name="menuAcerca_de">
+    <property name="title">
+     <string>Acerca de</string>
+    </property>
+   </widget>
    <addaction name="menuArchivo"/>
+   <addaction name="menuInformes"/>
+   <addaction name="menuAcerca_de"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -1040,6 +1055,21 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
   <action name="actionAbrir">
    <property name="text">
     <string>Abrir</string>
+   </property>
+  </action>
+  <action name="menubarReportCli">
+   <property name="text">
+    <string>Listado Clientes</string>
+   </property>
+  </action>
+  <action name="actionImprimir_Factura">
+   <property name="text">
+    <string>Imprimir Factura</string>
+   </property>
+  </action>
+  <action name="actionListado_Productos">
+   <property name="text">
+    <string>Listado Productos</string>
    </property>
   </action>
  </widget>

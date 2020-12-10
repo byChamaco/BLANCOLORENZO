@@ -4,7 +4,7 @@ from ventSalir import *
 from ventavisos import *
 from ventCalendar import *
 from datetime import datetime, date
-import sys, var, events, clients, conexion
+import sys, var, events, clients, conexion, printer
 import locale
 # Idioma "es-ES" (código para el español de España)
 locale.setlocale(locale.LC_ALL, 'es-ES')
@@ -44,6 +44,10 @@ class FileDialogAbrir(QtWidgets.QFileDialog):
         self.setWindowTitle('Abrir Archivo')
         self.setModal(True)
 
+class PrintDialogAbrir(QtPrintSupport.QPrintDialog):
+    def __init__(self):
+        super(PrintDialogAbrir, self).__init__()
+
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
         super(Main, self).__init__()
@@ -52,7 +56,9 @@ class Main(QtWidgets.QMainWindow):
         var.dlgsalir = DialogSalir()
         var.dlgcalendar = DialogCalendar()
         var.filedlgabrir = FileDialogAbrir()
+        var.dlgImprimir = PrintDialogAbrir()
         var.dlgaviso = DialogAvisos()
+        events.Eventos()
         '''
         colección de datos
         '''
@@ -96,6 +102,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.lblstatusdate.setStyleSheet('QLabel {color: black; font: bold;}')
         var.ui.lblstatusdate.setText(fecha.strftime('%A %d de %B del %Y'))
 
+
+        var.ui.menubarReportCli.triggered.connect(printer.Printer.reportCli)
         '''
         módulos del principal
         '''
@@ -104,7 +112,8 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.mostrarClientes(self)
 
     def closeEvent(self, event):
-        events.Eventos.Salir(event)
+        if event:
+            events.Eventos.Salir(event)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

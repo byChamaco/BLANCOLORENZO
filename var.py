@@ -2,6 +2,7 @@ global ui
 global dlgsalir
 global dlgcalendar
 global filedlgabrir
+global dlgImprimir
 global alta
 global baja
 global salir
