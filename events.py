@@ -50,12 +50,8 @@ class Eventos():
 
     def AbrirAviso(men):
         try:
-            if var.dlgsalir.exec_() and var.salir:
-                pass
-            else:
-                var.lblMensalir.setText(men)
-                var.dlgsalir.show()
-
+            var.lblMensaviso.setText(men)
+            var.dlgaviso.show()
         except Exception as error:
             print('Error abrir ventana aviso: %s ' % str(error))
 

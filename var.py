@@ -6,7 +6,7 @@ global dlgImprimir
 global alta
 global baja
 global salir
-global lblMensalir
+global lblMensaviso
 global dlgaviso
 
 global rbtsex

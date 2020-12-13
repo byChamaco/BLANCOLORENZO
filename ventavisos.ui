@@ -54,6 +54,9 @@
    <property name="text">
     <string>¿Está seguro que desea eliminar?</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QPushButton" name="btnAceptaviso">
    <property name="geometry">
