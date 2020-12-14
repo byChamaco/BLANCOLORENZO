@@ -1,4 +1,4 @@
-import sys, var, clients
+import sys, var, clients, conexion
 
 class Eventos():
     def Salir(event):
@@ -11,7 +11,7 @@ class Eventos():
                 sys.exit()
             else:
                 var.dlgsalir.hide()
-                event.ignore()
+                #event.ignore()
         except Exception as error:
             print('Error %s' % str(error))
 
@@ -48,6 +48,14 @@ class Eventos():
         except Exception as error:
             print('Error abrir explorador: %s ' % str(error))
 
+    def AbrirPrinter(self):
+        try:
+            var.dlgImprimir.setWindowTitle('Imprimir')
+            var.dlgImprimir.setModal(True)
+            var.dlgImprimir.show()
+        except Exception as error:
+            print('Error abrir imprimr: %s ' % str(error))
+
     def AbrirAviso(men):
         try:
             var.lblMensaviso.setText(men)
@@ -70,6 +78,8 @@ class Eventos():
 
     def mostrarAviso():
         try:
+            var.cliente = True
+            var.lblMensaviso.setText('¿Desea eliminar el cliente?')
             var.dlgaviso.show()
         except Exception as error:
             print('Error mostrar aviso: %s ' % str(error))

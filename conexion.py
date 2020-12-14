@@ -33,7 +33,7 @@ class Conexion():
         if query.exec_():
             print("Inserción Correcta")
             var.ui.lblstatus.setText('Alta Cliente con dni ' + str(cliente[0]))
-            Conexion.mostrarClientes(self)
+            Conexion.mostrarClientes(None)
         else:
             print("Error: ", query.lastError().text())
 
@@ -147,7 +147,7 @@ class Conexion():
             while query.next():
                 var.ui.lblCodcli.setText(str(query.value(0)))
                 var.ui.editApel.setText(str(query.value(1)))
-                var.ui.editNome.setText(str(query.value(2)))
+                var.ui.editNombre.setText(str(query.value(2)))
                 var.ui.editClialta.setText(query.value(4))
                 var.ui.editDir.setText(query.value(5))
                 var.ui.cmbProv.setCurrentText(str(query.value(6)))
