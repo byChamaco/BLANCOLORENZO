@@ -1,4 +1,4 @@
-import sys, var, clients, conexion
+import sys, var, clients, productos, conexion
 
 class Eventos():
     def Salir(event):
@@ -83,3 +83,18 @@ class Eventos():
             var.dlgaviso.show()
         except Exception as error:
             print('Error mostrar aviso: %s ' % str(error))
+
+    # def mostrarAvisoProd():
+    #     try:
+    #         var.producto = True
+    #         var.lblMensaviso.setText('¿Desea eliminar el producto?')
+    #         var.dlgaviso.show()
+    #     except Exception as error:
+    #         print('Error mostrar aviso producto: %s ' % str(error))
+    #
+    # def ConfirmarAvisoProd():
+    #     try:
+    #         productos.Productos.bajaProductos()
+    #         var.dlgaviso.hide()
+    #     except Exception as error:
+    #         print('Error botón confirmar eliminar producto: %s ' % str(error))

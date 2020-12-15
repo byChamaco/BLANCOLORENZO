@@ -4,7 +4,7 @@ from ventSalir import *
 from ventavisos import *
 from ventCalendar import *
 from datetime import datetime, date
-import sys, var, events, clients, conexion, printer
+import sys, var, events, clients, conexion, printer, productos
 import locale
 # Idioma "es-ES" (código para el español de España)
 locale.setlocale(locale.LC_ALL, 'es-ES')
@@ -103,14 +103,23 @@ class Main(QtWidgets.QMainWindow):
         var.ui.lblstatusdate.setStyleSheet('QLabel {color: black; font: bold;}')
         var.ui.lblstatusdate.setText(fecha.strftime('%A %d de %B del %Y'))
 
-
         var.ui.menubarReportCli.triggered.connect(printer.Printer.reportCli)
-        '''
-        módulos del principal
-        '''
+
         conexion.Conexion.db_connect(var.filebd)
         #conexion.Conexion()
         conexion.Conexion.mostrarClientes(self)
+
+        '''
+        conexión de los metodos con la iu
+        '''
+        conexion.Conexion.mostrarProductos(self)
+        var.ui.btnAltaPro.clicked.connect(productos.Productos.altaProductos)
+        var.ui.btnLimpiarPro.clicked.connect(productos.Productos.limpiarProd)
+        var.ui.btnBajaPro.clicked.connect(productos.Productos.bajaProductos)
+        var.ui.btnModifPro.clicked.connect(productos.Productos.modifProducto)
+        var.ui.btnSalirPro.clicked.connect(events.Eventos.Salir)
+        var.ui.tablaPro.clicked.connect(productos.Productos.cargarProd)
+        var.ui.tablaPro.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
     def closeEvent(self, event):
         if event:
