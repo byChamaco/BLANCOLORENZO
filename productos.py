@@ -7,7 +7,7 @@ class Productos():
         try:
             newprod = []
             prodtab = []
-            prod = [var.ui.editNomPro, var.ui.editPreUni]
+            prod = [var.ui.editNomPro, var.ui.editPreUni, var.ui.editStock]
             k = 0
             for i in prod:
                 newprod.append(i.text())
@@ -32,7 +32,7 @@ class Productos():
 
     def limpiarProd():
         try:
-            prod = [var.ui.editNomPro, var.ui.editPreUni]
+            prod = [var.ui.editNomPro, var.ui.editPreUni, var.ui.edi]
             for i in range(len(prod)):
                 prod[i].setText('')
             var.ui.lblCodPro.setText('')
@@ -57,7 +57,7 @@ class Productos():
             nombre = var.ui.editNomPro.text()
             conexion.Conexion.bajaProd(nombre)
             Productos.limpiarProd()
-            conexion.Conexion.mostrarProductos(None)
+            conexion.Conexion.mostrarProductos()
         except Exception as error:
             print('Error ventana baja producto: %s ' % str(error))
 

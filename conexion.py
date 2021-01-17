@@ -179,10 +179,12 @@ class Conexion():
     def altaPro(producto):
         query = QtSql.QSqlQuery()
         query.prepare(
-            'insert into articulos (nombre, precio_unidad)'
-            'VALUES (:nombre, :precio_unidad)')
+            'insert into articulos (nombre, precio_unidad,stock)'
+            'VALUES (:nombre, :precio_unidad, :stock)')
         query.bindValue(':nombre', str(producto[0]))
-        query.bindValue(':precio_unidad', str(producto[1]))
+        producto[1] = producto[1].replace(',',',')
+        query.bindValue(':precio_unidad', round(float(producto[1]),2))
+        query.bindValue(':stock', int(producto[2]))
         if query.exec_():
             print("Inserción Correcta")
             var.ui.lblstatus.setText('Alta Producto con nombre ' + str(producto[0]))
@@ -190,53 +192,60 @@ class Conexion():
         else:
             print("Error conexion alta: ", query.lastError().text())
 
-    def cargarProducto():
+    def cargarProducto(cod):
 
-        nombre = var.ui.editNomPro.text()
         query = QtSql.QSqlQuery()
-        query.prepare('select * from articulos where nombre = :nombre')
-        query.bindValue(':nombre', nombre)
+        query.prepare('select nombre, precio-unidad, stock from articulos where codigo = :cod')
+        query.bindValue(':cod', cod)
         if query.exec_():
             while query.next():
-                var.ui.lblCodPro.setText(str(query.value(0)))
+                var.ui.lblCodPro.setText(str(cod))
+                var.ui.editNomPro.setText(str(query.value(0)))
+                var.ui.editPreUni.setText(str(query.value(1)))
+                var.ui.editStock.setText(str(query.value(2)))
 
-    def mostrarProductos(self):
+    def mostrarProductos():
         index = 0
         query = QtSql.QSqlQuery()
-        query.prepare('select nombre, precio_unidad from articulos')
+        query.prepare('select codigo, nombre, precio_unidad from articulos')
         if query.exec_():
             while query.next():
-                nombre = query.value(0)
-                precio_unidad = query.value(1)
+                codigo = query.value(0)
+                nombre = query.value(1)
+                precio_unidad = query.value(2)
                 var.ui.tablaPro.setRowCount(index+1)
-                var.ui.tablaPro.setItem(index, 0, QtWidgets.QTableWidgetItem(nombre))
-                var.ui.tablaPro.setItem(index, 1, QtWidgets.QTableWidgetItem(precio_unidad))
+                var.ui.tablaPro.setItem(index, 0, QtWidgets.QTableWidgetItem(codigo))
+                var.ui.tablaPro.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
+                var.ui.tablaPro.setItem(index, 2, QtWidgets.QTableWidgetItem(precio_unidad))
                 index += 1
         else:
             print("Error mostrar productos: ", query.lastError().text())
 
-    def bajaProd(nombre):
+    def bajaProd(cod):
         query = QtSql.QSqlQuery()
-        query.prepare('delete from articulos where nombre = :nombre')
-        query.bindValue(':nombre', nombre)
+        query.prepare('delete from articulos where codigo = :cod')
+        query.bindValue(':cod', cod)
         if query.exec_():
             print('Baja producto')
-            var.ui.lblstatus.setText('Producto con nombre '+ nombre + ' dado de baja')
+            var.ui.lblstatus.setText('Producto con nombre '+ cod + ' dado de baja')
         else:
             print("Error baja conexion productos: ", query.lastError().text())
+        Conexion.mostrarProductos()
 
-    def modifProd(codigo, newdataprod):
-           query = QtSql.QSqlQuery()
-           codigo = int(codigo)
-           query.prepare('update articulos set nombre=:nombre, precio_unidad=:precio_unidad where codigo=:codigo')
-           query.bindValue(':codigo', int(codigo))
-           query.bindValue(':nombre', str(newdataprod[0]))
-           query.bindValue(':precio_unidad', str(newdataprod[1]))
-           if query.exec_():
-               print('Producto modificado')
-               var.ui.lblstatus.setText('Producto con nombre '+ str(newdataprod[0]) + ' modificado')
-           else:
-               print("Error modificar producto: ", query.lastError().text())
+    def modifProd(cod, newdataprod):
+        cod = int(cod)
+        query = QtSql.QSqlQuery()
+        query.prepare('update articulos set nombre=:nombre, precio_unidad=:precio_unidad, stock=:stock where codigo=:cod')
+        query.bindValue(':cod', int(cod))
+        query.bindValue(':nombre', str(newdataprod[0]))
+        newdataprod[1] = newdataprod[1].replace(',',',')
+        query.bindValue(':precio_unidad', round(float(newdataprod(1)),2))
+        query.bindValue(':stock', int(newdataprod[2]))
+        if query.exec_():
+            print('Producto modificado')
+            var.ui.lblstatus.setText('Producto con código '+ str(cod) + ' modificado')
+        else:
+            print("Error modificar producto: ", query.lastError().text())
 
 '''
 conexión base de datos MongoDB

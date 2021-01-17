@@ -1,4 +1,6 @@
-import sys, var, clients, productos, conexion
+import sys, var, clients, conexion, zipfile, os, shutil
+from datetime import  datetime
+from PyQt5 import  QtWidgets
 
 class Eventos():
     def Salir(event):
@@ -23,6 +25,19 @@ class Eventos():
         except Exception as error:
             print('Error %s' % str(error))
 
+    def CerrarAbout(event):
+        try:
+            if var.dlgabout.exec_():
+                var.dlgabout.hide()
+        except Exception as error:
+            print('Error %s' % str(error))
+
+    def abrirAbout(self):
+        try:
+            var.dlgabout.show()
+        except Exception as error:
+            print('Error abrir About: %s ' % str(error))
+
     def cargarProv(self):
         """
         carga las provincias al iniciar el programa
@@ -36,9 +51,19 @@ class Eventos():
         except Exception as error:
             print('Error: %s' % str(error))
 
-    def Backup(self):
+    def Backup():
         try:
-            print('hará copia de seguidad de la BBDD')
+            fecha = datetime.today()
+            fecha = fecha.strftime('%Y.%m.%d.%H.%M.%S')
+            var.copia = (str(fecha) + '_backup.zip')
+            option = QtWidgets.QFileDialog.Options()
+            directorio, filename = var.filedlgabrir.getSaveFileName(None, 'Guardar Copia', var.copia, '.zip', options=option)
+            if var.filedlgabrir.Accepted and filename != '':
+                fichzip = zipfile.ZipFile(var.copia, 'w')
+                fichzip.write(var.filebd, os.path.basename(var.filebd), zipfile.ZIP_DEFLATED)
+                fichzip.close()
+                var.ui.lblstatus.setText('COPIA DE SEGURIDAD DE BASE DE DATOS CREADA')
+                shutil.move(str(var.copia), str(directorio))
         except Exception as error:
             print('Error: %s' % str(error))
 
@@ -65,8 +90,14 @@ class Eventos():
 
     def Confirmar():
         try:
-            clients.Clientes.bajaCliente()
-            var.dlgaviso.hide()
+            if var.cliente:
+                clients.Clientes.bajaCliente()
+                var.dlgaviso.hide()
+                var.cliente = False
+                conexion.Conexion.mostrarClientes(None)
+            if var.backup:
+                var.backup = False
+                var.dlgaviso.hide()
         except Exception as error:
             print('Error botón confirma: %s ' % str(error))
 

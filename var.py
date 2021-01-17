@@ -8,6 +8,12 @@ global baja
 global salir
 global lblMensaviso
 global dlgaviso
+global dlgabout
+global rep
+global backup
+global copia
+global filedlgsave
+global cliente
 
 global rbtsex
 global chkpago

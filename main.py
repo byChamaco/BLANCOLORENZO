@@ -1,13 +1,21 @@
-from PyQt5 import QtWidgets, QtGui, QtCore, QtPrintSupport
+from PyQt5 import QtPrintSupport
 from ventana import *
 from ventSalir import *
 from ventavisos import *
 from ventCalendar import *
+from ventabout import *
 from datetime import datetime, date
 import sys, var, events, clients, conexion, printer, productos
 import locale
 # Idioma "es-ES" (código para el español de España)
 locale.setlocale(locale.LC_ALL, 'es-ES')
+
+class DialogAbout(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogAbout, self).__init__()
+        var.dlgabout = Ui_dlgAbout()
+        var.dlgabout.setupUi(self)
+        var.dlgabout.btnCerrar.clicked.connect(events.Eventos.CerrarAbout)
 
 class DialogAvisos(QtWidgets.QDialog):
     def __init__(self):
@@ -25,7 +33,6 @@ class DialogSalir(QtWidgets.QDialog):
         var.dlgsalir.btnAceptar.clicked.connect(events.Eventos.Salir)
         var.dlgsalir.btnCancelar.clicked.connect(events.Eventos.closeSalir)
         #var.dlgsalir.btnBoxSalir(var.dlgsalir.btnAceptar).clicked.connect(events.Eventos.Salir)
-
 
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
@@ -58,6 +65,7 @@ class Main(QtWidgets.QMainWindow):
         var.filedlgabrir = FileDialogAbrir()
         var.dlgImprimir = PrintDialogAbrir()
         var.dlgaviso = DialogAvisos()
+        var.dlgabout = DialogAbout()
         events.Eventos()
         '''
         colección de datos
@@ -103,7 +111,11 @@ class Main(QtWidgets.QMainWindow):
         var.ui.lblstatusdate.setStyleSheet('QLabel {color: black; font: bold;}')
         var.ui.lblstatusdate.setText(fecha.strftime('%A %d de %B del %Y'))
 
+        '''
+        módulos de impresión
+        '''
         var.ui.menubarReportCli.triggered.connect(printer.Printer.reportCli)
+        var.ui.menubarReportPro.triggered.connect(printer.Printer.reportPro)
 
         conexion.Conexion.db_connect(var.filebd)
         #conexion.Conexion()
@@ -112,7 +124,7 @@ class Main(QtWidgets.QMainWindow):
         '''
         conexión de los metodos con la iu
         '''
-        conexion.Conexion.mostrarProductos(self)
+        conexion.Conexion.mostrarProductos()
         var.ui.btnAltaPro.clicked.connect(productos.Productos.altaProductos)
         var.ui.btnLimpiarPro.clicked.connect(productos.Productos.limpiarProd)
         var.ui.btnBajaPro.clicked.connect(productos.Productos.bajaProductos)
