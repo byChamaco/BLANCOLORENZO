@@ -1,5 +1,5 @@
 from PyQt5 import QtSql
-import pymongo, var
+import pymongo, var, ventas
 from ventana import *
 
 class Conexion():
@@ -246,6 +246,231 @@ class Conexion():
             var.ui.lblstatus.setText('Producto con código '+ str(cod) + ' modificado')
         else:
             print("Error modificar producto: ", query.lastError().text())
+
+    # Conexión de la FACTURA con la base de datos
+
+    def altaFac(dni, fecha, apel):
+        query = QtSql.QSqlQuery()
+        query.prepare('insert into facturas (dni, fecha, apellidos) VALUES (:dni, :fecha, :apellidos )')
+        query.bindValue(':dni', str(dni))
+        query.bindValue(':fecha', str(fecha))
+        query.bindValue(':apellidos', str(apel))
+        if query.exec_():
+            var.ui.lblstatus.setText('Factura Creada')
+        else:
+            print("Error alta factura: ", query.lastError().text())
+        query1 = QtSql.QSqlQuery()
+        query1.prepare('select max(codfac) from facturas')
+        if query1.exec_():
+            while query1.next():
+                var.ui.lblNumFac.setText(str(query1.value(0)))
+
+    def mostrarFacturas(self):
+        index = 0
+        query = QtSql.QSqlQuery()
+        query.prepare('select codfac, fecha from facturas order by codfac desc')
+        if query.exec_():
+            while query.next():
+                # crea la fila
+                var.ui.tabFac.setRowCount(index + 1)
+                # voy metiendo los datos en cada celda de la fila
+                var.ui.tabFac.setItem(index, 0, QtWidgets.QTableWidgetItem(str(query.value(0))))
+                var.ui.tabFac.setItem(index, 1, QtWidgets.QTableWidgetItem(str(query.value(1))))
+                index += 1
+            Conexion.limpiarFac(self)
+            var.ui.tabFac.selectRow(0)
+            var.ui.tabFac.setFocus()
+        else:
+            print("Error mostrar facturas: ", query.lastError().text())
+        if index == 0:
+            var.ui.tabFac.clearContents()
+
+    def mostrarFacturascli(self):
+        index = 0
+        cont = 0
+        dni = var.ui.editDniclifac.text()
+        query = QtSql.QSqlQuery()
+        query.prepare('select codfac, fecha from facturas where dni = :dni order by codfac desc')
+        query.bindValue(':dni', str(dni))
+        if query.exec_():
+            while query.next():
+                # cojo los valores
+                cont = cont + 1
+                codfac = query.value(0)
+                fecha = query.value(1)
+                # crea la fila
+                var.ui.tabFac.setRowCount(index + 1)
+                # voy metiendo los datos en cada celda de la fila
+                var.ui.tabFac.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codfac)))
+                var.ui.tabFac.setItem(index, 1, QtWidgets.QTableWidgetItem(str(fecha)))
+                index += 1
+            if cont == 0:
+                var.ui.tabFac.setRowCount(0)
+                var.ui.lblstatus.setText('Cliente sin Facturas')
+        else:
+            print("Error mostrar facturas cliente: ", query.lastError().text())
+
+    def limpiarFac(self):
+        datosfac = [var.ui.editDniclifac, var.ui.editDatafac, var.ui.lblNumFac, var.ui.editApelclifac]
+        for i, data in enumerate(datosfac):
+            datosfac[i].setText('')
+
+    def cargarFac(cod):
+        query = QtSql.QSqlQuery()
+        query.prepare('select dni, apellidos from facturas where codfac = :codfac')
+        query.bindValue(':codfac', int(cod))
+        if query.exec_():
+            while query.next():
+                var.ui.editDniclifac.setText(str(query.value(0)))
+                var.ui.editApelclifac.setText(str(query.value(1)))
+
+    def cargarFac2(self):
+        query = QtSql.QSqlQuery()
+        query.prepare('select codfac, dni, fecha, apellidos from facturas ORDER BY codfac DESC LIMIT 1')
+        if query.exec_():
+            while query.next():
+                var.ui.lblNumFac.setText(str(query.value(0)))
+                var.ui.editDniclifac.setText(str(query.value(1)))
+                var.ui.editDatafac.setText(str(query.value(2)))
+                var.ui.editApelclifac.setText(str(query.value(3)))
+
+    def cargarCmbventa(cmbventa):
+        var.cmbventa.clear()
+        query = QtSql.QSqlQuery()
+        var.cmbventa.addItem('')
+        query.prepare('select codigo, producto from productos order by producto')
+        if query.exec_():
+            while query.next():
+                var.cmbventa.addItem(str(query.value(1)))
+        # articulo = var.cmbventa.currentText()
+        # return articulo
+
+    def obtenCodPrec(articulo):
+        dato = []
+        query = QtSql.QSqlQuery()
+        query.prepare('select codigo, precio from productos where producto = :articulo')
+        query.bindValue(':articulo', str(articulo))
+        if query.exec_():
+            while query.next():
+                dato = [str(query.value(0)), str(query.value(1))]
+        return dato
+
+    def altaVenta():
+        query = QtSql.QSqlQuery()
+        query.prepare('insert into ventas (codfacventa, codarticventa, cantidad, precio) VALUES (:codfacventa, :codarticventa,'
+                      ' :cantidad, :precio )')
+        query.bindValue(':codfacventa', int(var.venta[0]))
+        query.bindValue(':codarticventa', int(var.venta[1]))
+        query.bindValue(':cantidad', int(var.venta[3]))
+        query.bindValue(':precio', float(var.venta[4]))
+        row = var.ui.tabVenta.currentRow()
+        if query.exec_():
+            var.ui.lblstatus.setText('Venta Realizada')
+            var.ui.tabVenta.setItem(row, 1, QtWidgets.QTableWidgetItem(str(var.venta[2])))
+            var.ui.tabVenta.setItem(row, 2, QtWidgets.QTableWidgetItem(str(var.venta[3])))
+            var.ui.tabVenta.setItem(row, 3, QtWidgets.QTableWidgetItem(str(var.venta[4])))
+            var.ui.tabVenta.setItem(row, 4, QtWidgets.QTableWidgetItem(str(var.venta[5])))
+            row = row + 1
+            var.ui.tabVenta.insertRow(row)
+            var.ui.tabVenta.setCellWidget(row, 1, var.cmbventa)
+            var.ui.tabVenta.scrollToBottom()
+            Conexion.cargarCmbventa(var.cmbventa)
+        else:
+            print("Error alta venta: ", query.lastError().text())
+
+    def anulaVenta(codVenta):
+        query = QtSql.QSqlQuery()
+        query.prepare('delete from ventas where codventa = :codVenta')
+        query.bindValue(':codVenta', codVenta)
+        if query.exec_():
+            var.ui.lblstatus.setText('Venta Anulada')
+        else:
+            print("Error baja venta: ", query.lastError().text())
+
+    def borraFac(self,codfac):
+        query = QtSql.QSqlQuery()
+        query.prepare('delete from facturas where codfac = :codfac')
+        query.bindValue(':codfac', int(codfac))
+        if query.exec_():
+            var.ui.lblstatus.setText('Factura Anulada')
+            Conexion.mostrarFacturas(self)
+        else:
+            print("Error anular factura en borrafac: ", query.lastError().text())
+
+        query1 = QtSql.QSqlQuery()
+        query1.prepare('delete from ventas where codfacventa = :codfac')
+        query1.bindValue(':codfac', int(codfac))
+        if query1.exec_():
+            var.ui.lblstatus.setText('Factura Anulada')
+
+        # query1 = QtSql.QSqlQuery()
+        # query1.prepare('delete from ventas where codfacventa = :codfac')
+        # query1.bindValue(':codfacventa', int(codfac))
+        # if query1.exec_():
+        #     var.ui.lblstatus.setText('Factura Anulada')
+        # else:
+        #     print("Error anular factura en borrafac: ", query.lastError().text())
+
+
+    def listadoVentasfac(codfac):
+        """
+
+        Módulo que lista las ventas contenidaa en una factura
+        :param codfac: valor factura a la que se incluirán las líneas de venta
+        :type codfac: int
+
+        Recibe el código de la factura para seleccionar los datos de las ventas cargadas a esta.
+        De la BB.DD toma el nombre del producto y su precio para cada línea de venta. El precio lo multiplica
+        por las unidades y se obtiene el subtotal de cada línea. Después en cada línea de la tabla irá
+        el código de la venta, el nombre del producto, las unidades y dicho subotal.
+        Finalmente, va sumando el subfact, que es la suma de todas las ventas de esa factura, le aplica el IVA y
+        el importe total de la factura. Los tres valores, subfact, iva y fac los muestra en los label asignados.
+
+        En excepciones se recoge cualquier error que se produzca en la ejecución del módulo.
+
+        """
+        try:
+
+            var.subfac = 0.00
+            query = QtSql.QSqlQuery()
+            query1 = QtSql.QSqlQuery()
+            query.prepare('select codventa, codarticventa, cantidad from ventas where codfacventa = :codfac')
+            query.bindValue(':codfac', int(codfac))
+            if query.exec_():
+                index = 0
+                while query.next():
+                    codventa = query.value(0)
+                    codarticventa = query.value(1)
+                    cantidad = query.value(2)
+                    var.ui.tabVenta.setRowCount(index + 1)
+                    var.ui.tabVenta.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codventa)))
+                    query1.prepare('select producto, precio from productos where codigo = :codarticventa')
+                    query1.bindValue(':codarticventa', int(codarticventa))
+                    if query1.exec_():
+                        while query1.next():
+                            articulo = query1.value(0)
+                            precio = query1.value(1)
+                            var.ui.tabVenta.setItem(index, 1, QtWidgets.QTableWidgetItem(str(articulo)))
+                            var.ui.tabVenta.setItem(index, 2, QtWidgets.QTableWidgetItem(str(cantidad)))
+                            subtotal = round(float(cantidad) * float(precio), 2)
+                            var.ui.tabVenta.setItem(index, 3, QtWidgets.QTableWidgetItem(str(precio)))
+                            var.ui.tabVenta.setItem(index, 4, QtWidgets.QTableWidgetItem(str(subtotal)))
+                    index += 1
+                    var.subfac = round(float(subtotal) + float(var.subfac), 2)
+                #ventas.Ven tas.prepararTablaventas(index)
+            if int(index) > 0:
+                ventas.Ventas.prepararTablaventas(index)
+            else:
+                print(index)
+                var.ui.tabVenta.setRowCount(0)
+                ventas.Ventas.prepararTablaventas(0)
+            var.ui.lblSubtotal.setText(str(var.subfac))
+            var.iva = round(float(var.subfac) * 0.21, 2)
+            var.ui.lblIva.setText(str(var.iva))
+            var.fac = round(float(var.iva) + float(var.subfac), 2)
+            var.ui.lblTotal.setText(str(var.fac))
+        except Exception as error:
+            print('Error Listado de la tabla de ventas: %s ' % str(error))
 
 '''
 conexión base de datos MongoDB
