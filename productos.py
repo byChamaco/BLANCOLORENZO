@@ -1,6 +1,7 @@
 import var, conexion, events
 from ventavisos import *
 
+
 class Productos():
 
     def altaProductos(self):
