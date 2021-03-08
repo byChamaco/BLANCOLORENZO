@@ -81,6 +81,16 @@ class PrintDialogAbrir(QtPrintSupport.QPrintDialog):
         '''
         super(PrintDialogAbrir, self).__init__()
 
+class CmbVenta(QtWidgets.QComboBox):
+    def __init__(self):
+        """
+
+        Clase que instancia el combo de articulos
+
+        """
+        super(CmbVenta, self).__init__()
+        var.cmbventa = QtWidgets.QComboBox()
+
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
         '''
