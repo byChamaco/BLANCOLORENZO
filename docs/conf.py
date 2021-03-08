@@ -12,7 +12,8 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('C:\Users\a19oscarbl\PycharmProjects\BLANCOLORENZO'))
+sys.path.insert(0, os.path.abspath('C:\Users\Usuario\PycharmProjects\BLANCOLORENZO'))
+#sys.path.insert(0, os.path.abspath('C:\Users\a19oscarbl\PycharmProjects\BLANCOLORENZO'))
 
 
 # -- Project information -----------------------------------------------------

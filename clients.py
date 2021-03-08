@@ -7,8 +7,16 @@ class Clientes():
     '''
     def validarDni(dni):
         '''
-        Código que controla si el dni o nie es correcto
-        :return:
+            Móudulo que valida la letra de un dni según sea nacional o extranjerao
+
+            :param a: dni
+            :type: string
+            :return: None
+            :rtype: bool
+
+            Pone la letra en mayúsculas, comprueba que son nueve caracteres. Toma los 8 primeros, si extranjero
+            cambia la letra por el número, y aplica el algoritmo de comprobación de la letra basado en la normativa
+            Si es correcto devuelve True, si es falso devuelva False
         '''
         try:
             tabla = 'TRWAGMYFPDXBNJZSQVHLCKE'
@@ -29,8 +37,11 @@ class Clientes():
 
     def validoDni():
         '''
-        muestra mensaje de dni válido
-        :return: none
+            Modulo que según sea correcto el dni o no, muestra una imagen distinta
+            :return: none
+
+            Si es falso escribe en el label una cruz roja si es true devuelve una V verda
+
         '''
         try:
             dni = var.ui.editDni.text()
@@ -51,6 +62,15 @@ class Clientes():
             return None
 
     def selSexo(self):
+        '''
+
+            Modulo que según checkemos el rbtbutton Fem o Masc carga el texto correspondiente de Mujer o Hombre a la
+            variable var.sex que luego se añade a la lista de los datos del cliente a incluir en la BBDD
+
+            :return: None
+            :rtype: None
+
+        '''
         try:
             if var.ui.rbtFem.isChecked():
                 var.sex =  'Mujer'
@@ -61,11 +81,11 @@ class Clientes():
 
     def selPago():
         '''
-        chequea que valores de pago han sido activados
-        agrupamos en QtDesigner los checkbox en un ButtonGroup
-        devuelve una lista de valores
-        return:
-            '''
+            Chequea que valores de paga selecciono en el checkbos y los añade a una variable lista var.py
+            :return: None
+
+            En QtDesigner se debe agrupar los checkbox en un ButtonGroup
+        '''
         try:
             var.pay = []
             for i, data in enumerate(var.ui.grpbtnPay.buttons()):
@@ -80,25 +100,46 @@ class Clientes():
             print('Error: %s' % str(error))
 
     def selProv(prov):
+        '''
+
+            Al seleccion una provincia en el combo de provincias llamba al evento cmbProv.activated que devuelve
+            la provincia selecccionada
+
+            :param a: provincia seleccionada
+            :type a: string
+            :return: None
+            :rtype: None
+
+        '''
         try:
             global vpro
             vpro = prov
         except Exception as error:
             print('Error: %s' % str(error))
 
-    '''
-    Abrir la ventana calendario
-    '''
     def abrirCalendar(self):
+        '''
+
+            Modulo que abre la ventana calendario
+
+        '''
         try:
             var.dlgcalendar.show()
         except Exception as error:
             print('Error: %s ' % str(error))
 
-    '''
-    Este módulo se ejecuta cuando clickeamos en un día del calendar, es decir, clicked.connect de calendar
-    '''
     def cargarFecha(qDate):
+        '''
+
+            Módulo que carga la fecha marcada en el widget Calendar
+
+            :parama a: librería python para formateo de fehcas
+            :return: None
+            :rtype: formato de fechas python
+
+            A partir de los eventos Calendar.clicked.connect al clickear en una fecha, captura y la carga el widget edit
+            que almacena la fecha
+        '''
         try:
             data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
             var.ui.editClialta.setText(str(data))
@@ -108,8 +149,17 @@ class Clientes():
 
     def altaClientes(self):
         '''
-        cargará los clientes en la tabla
-        :return: none
+            Módulo que carga los datos del cliente
+
+            :param a: None
+            :param b: None
+            :return: None
+
+            Se crea una lista newcli que contendrá todos los datos del cliente que se introduzcan en los widgets,
+            esta lista se pasa como argumento al módulo altaCli del módulo Conexión.
+            El módulo llama a la función mostrarClientes que recarga la tabla con todos los clientes además del nuevo
+            El módulo llama a la función limpiarCli que vacía el contenido de los widgets.
+
         '''
         #preparamos el registro
         try:
@@ -147,10 +197,11 @@ class Clientes():
 
     def limpiarCli():
         '''
-        limpia los datos del formulario cliente
-        :param listaRbtsex:
-        :param listaChkpay:
-        :return: none
+            Modulo que vacía o limpia los datos del formulario cliente
+
+            :return: None
+
+            En los checkbox y radiobutton los pone a False.
         '''
         try:
             client = [var.ui.editDni, var.ui.editApel, var.ui.editNombre, var.ui.editClialta, var.ui.editDir]
@@ -168,6 +219,15 @@ class Clientes():
             print('Error limpiar widgets: %s ' % str(error))
 
     def cargarCli():
+        '''
+            Modulo que se activa con el evento clicked.connec y setSelectionBehavior del widget TtableCli
+
+            :return: None
+            :rtype: None
+
+            Al generarse el evento se llama al módulo de Conexion cargarCliente que devuelve los datos del cliente
+            seleccionado haciendo una llamada a la BBDD
+        '''
         try:
             fila = var.ui.tablaCli.selectedItems()
             client = [var.ui.editDni, var.ui.editApel, var.ui.editNombre]
@@ -182,8 +242,14 @@ class Clientes():
 
     def bajaCliente():
         """
-        módulos para dar de baja un cliente
-        :return:
+            Módulo que da de baja un cliente a partir del dni. Además recarga el widget tablaCli con los datos actualizados
+            desde la BBDD
+
+            :return: None
+            :rtype: None
+
+            Toma el dni cargado en el widget editDni se lo pasa al módulo bajaCli de la clase Conexión y da de bja el cliente.
+            Limpia los datos del formulario y recarga tablaCli
         """
         try:
             dni = var.ui.editDni.text()
@@ -195,9 +261,17 @@ class Clientes():
             print('Error ventana baja cliente: %s ' % str(error))
 
     def modifCliente(self):
-        """Módulos para modificar datos de un cliente con determinado código
+        """
+            Módulos para modificar datos de un cliente con determinado código
 
-        :return: None
+            :return: None
+            :rtype: None
+
+            A partir del código del cliente, lee los nuevos datos de los widgets que se han cargado y modificado,
+            llama al módulo modifCli de la clase Conexión para actualizar los datos en la BBDD pasándole una lista con
+            los nuevos datos.
+            Vuelve a mostrar la tablaCli actualizada pero no limpia datos de los widgets.
+
         """
         try:
             newdata = []
@@ -232,7 +306,10 @@ class Clientes():
     def buscarCli(self):
         """
         Busca un Cliente a partir de un dni que escribe el usuario
-        :return: mensaje
+        :return: None
+        :rtype: None
+
+        Toma el dni del widget editDni y llama a la función buscaCli de la clase Conexión a la que le pasa el dni.
         """
         try:
             #Clientes.limpiarCli()
@@ -242,6 +319,12 @@ class Clientes():
             print('Error buscar clientes: %s ' % str(error))
 
     def valoresSpin():
+        '''
+            Módulo que se lanza con el programa cargando por defecto el valor 16 en el spinEdad
+
+            :return: None
+            :rtype: None
+        '''
         try:
             var.ui.spinEdad.setValue(16)
         except Exception as error:

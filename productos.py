@@ -1,76 +1,111 @@
-import var, conexion, events
-from ventavisos import *
+import var, conexion
 
+class Products():
+    def limpiarPro(self):
+        """
 
-class Productos():
+        Modulo que limpia el formulario producto
 
-    def altaProductos(self):
+        :return: none
+        :rtype: none
+
+        """
         try:
-            newprod = []
-            prodtab = []
-            prod = [var.ui.editNomPro, var.ui.editPreUni, var.ui.editStock]
-            k = 0
-            for i in prod:
-                newprod.append(i.text())
-                if k < 2:
-                    prodtab.append(i.text())
-                    k += 1
-            if prod:
-                row = 0
-                column = 0
-                var.ui.tablaPro.insertRow(row)
-                for registro in prodtab:
-                    cell = QtWidgets.QTableWidgetItem(registro)
-                    var.ui.tablaPro.setItem(row, column, cell)
-                    column +=1
-                conexion.Conexion.altaPro(newprod)
-            else:
-                print('Faltan Datos')
-                conexion.Conexion.mostrarProductos(None)
-                Productos.limpiarProd()
-        except Exception as error:
-            print('Error show Productos: %s ' % str(error))
-
-    def limpiarProd():
-        try:
-            prod = [var.ui.editNomPro, var.ui.editPreUni, var.ui.edi]
-            for i in range(len(prod)):
-                prod[i].setText('')
+            product = [var.ui.editArtic, var.ui.editPrec, var.ui.editStock]
+            for i in range(len(product)):
+                product[i].setText('')
             var.ui.lblCodPro.setText('')
         except Exception as error:
-            print('Error limpiar widgets productos: %s ' % str(error))
+            print('Error limpiar widgets: %s ' % str(error))
+
+    def altaProducto(self):
+        """
+
+        Modulo que isertara los datos del producto en la tabla y BBDD
+
+        :return: none
+        :rtype: none
+
+        """
+        try:
+            newpro = []
+            producto = [var.ui.editArtic, var.ui.editPrec, var.ui.editStock ]
+            k = 0
+            for i in producto:
+                newpro.append(i.text())
+            if producto:
+                conexion.Conexion.altaProducto(newpro)
+            else:
+                print('Faltan Datos')
+            Products.limpiarPro(producto)
+            conexion.Conexion.cargarCmbventa(var.cmbventa)
+        except Exception as error:
+            print('Error cargar producto : %s ' % str(error))
+
+
+    def modifPro(self):
+        """
+
+        Modulo para modificar los datos de un producto con un determinado codigo
+
+        :return: none
+        :rtype: none
+
+        Tambien recarga la tabla productos con los nuevo valores
+
+        """
+        try:
+            newdata = []
+            product = [var.ui.editArtic, var.ui.editPrec, var.ui.editStock]
+            for i in product:
+                newdata.append(i.text())
+            cod = var.ui.lblCodPro.text()
+            conexion.Conexion.modificarPro(cod, newdata)
+            conexion.Conexion.mostrarProducts()
+            conexion.Conexion.cargarCmbventa()
+
+        except Exception as error:
+            print('Error modificar producto: %s ' % str(error))
 
     def cargarProd():
+        """
+
+        Modulo que carga los datos de los productos de la fila clicada
+        en sus widgets
+
+        :return: none
+        :rtype: none
+
+        """
         try:
-            fila = var.ui.tablaPro.selectedItems()
-            prod = [var.ui.editNomPro, var.ui.editPreUni]
+            fila = var.ui.tableProd.selectedItems()
+            prod = [ var.ui.editArtic, var.ui.editPrec, var.ui.editStock ]
             if fila:
                 fila = [dato.text() for dato in fila]
-            i = 0
+            i = 1
+            cod = fila[0]
             for i, dato in enumerate(prod):
                 dato.setText(fila[i])
-            conexion.Conexion.cargarProducto()
+            conexion.Conexion.cargarProd(cod)
         except Exception as error:
-            print('Error cargar producto: %s ' % str(error))
+            print('Error cargar productos en productos: %s ' % str(error))
 
-    def bajaProductos():
+    def bajaProd(self):
+        """
+
+        Modul que da de baja un producto y recarga la tabla productos
+        y limpia el formulario
+
+        :return: none
+        :rtype: none
+
+        """
         try:
-            nombre = var.ui.editNomPro.text()
-            conexion.Conexion.bajaProd(nombre)
-            Productos.limpiarProd()
-            conexion.Conexion.mostrarProductos()
+            cod = var.ui.lblCodPro.text()
+            conexion.Conexion.bajaPro(cod)
+            Products.limpiarPro(self)
+            var.dlgaviso.hide()
+            conexion.Conexion.mostrarProducts()
+            conexion.Conexion.cargarCmbventa()
         except Exception as error:
             print('Error ventana baja producto: %s ' % str(error))
-
-    def modifProducto(self):
-        try:
-            newdataprod = []
-            prod = [var.ui.editNomPro, var.ui.editPreUni]
-            for i in prod:
-                newdataprod.append(i.text())
-            codprod = var.ui.lblCodPro.text()
-            conexion.Conexion.modifProd(codprod, newdataprod)
-            conexion.Conexion.mostrarProductos(self)
-
-        except Exception as error:
-            print('Error cargar productos: %s ' % str(error))

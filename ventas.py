@@ -6,6 +6,17 @@ from time import sleep
 class Ventas:
 
     def altaFactura(self):
+        """
+
+        Modulo que carga los datos de la factura antes del proceso de ventas
+
+        :return: none
+        :rtype: none
+
+        Coge los datos de los widgets, asegurandose de que han sido escritos
+        para despues guardarlos y prepara la tablas de ventas
+
+        """
         try:
             dni = var.ui.editDniclifac.text()
             fecha = var.ui.editDatafac.text()
@@ -21,18 +32,33 @@ class Ventas:
             return None
 
     def abrirCalendar(self):
-        '''
-        Abrir la ventana calendario
-        '''
+        """
+
+        Modulo que carga la ventana calendar
+
+        :return: none
+        :rtype: none
+
+        """
         try:
             var.dlgcalendar.show()
         except Exception as error:
             print('Error: %s ' % str(error))
 
     def cargarFechafac(qDate):
-        ''''
-        Este módulo se ejecuta cuando clickeamos en un día del calendar, es decir, clicked de calendar
-        '''
+        """
+
+        Modulo que carga la fecha
+
+        :param qDate: para formatear la fecha
+        :type qDate: none
+        :return: none
+        :rtype: none
+
+        Recibe los datos introducidos por el cliente al clickar en el
+        calendario y los pasa a formato de fecha para despues cargarlos en su widget
+
+        """
         try:
             if var.ui.tabWidget.currentIndex() == 1:
                 data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
@@ -42,10 +68,17 @@ class Ventas:
             print('Error cargar fecha factura: %s ' % str(error))
 
     def cargarFact(self):
-        '''
-        Módulo que carga los datos de la factura y cliente
-        :return:
-        '''
+        """
+
+        Modulo que carga en los widgets los datos de una factura
+
+        :return: none
+        :rtype: none
+
+        Al iniciarse recoge los datos de la factura seleccionada y
+        los introduce en sus respectivos widgets
+
+        """
         try:
             var.subfac = 0.00
             var.fac = 0.00
@@ -61,11 +94,19 @@ class Ventas:
             print('Error cargar Factura: %s ' % str(error))
 
     def prepararTablaventas(index):
-        '''
-        Modulo que prepara tabla Ventas, carga un combo en la tabla
-        y carga dicho combo con los datos del producto
-        :return:
-        '''
+        """
+
+        Modulo que prepara la tabla ventas
+
+        :param index: fila de la tabla
+        :type index: int
+        :return: none
+        :rtype: none
+
+        Carga un combo de articulos en la tablas ventas con
+        los datos del producto e inserta nueva fila en la tabla
+
+        """
         try:
             var.cmbventa = QtWidgets.QComboBox()
             conexion.Conexion.cargarCmbventa(var.cmbventa)
@@ -105,7 +146,6 @@ class Ventas:
             subtotal = round(float(cantidad)*float(dato[1]), 2)
             var.venta.append(subtotal)
             var.venta.append(row)
-            #sleep(1)
             if codfac != '' and articulo != '' and cantidad != '':
                 conexion.Conexion.altaVenta()
                 var.subfac = round(float(subtotal) + float(var.subfac),2)
