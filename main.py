@@ -159,6 +159,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.menubarImportarDatos.triggered.connect(events.Eventos.MercaEstadisticas)
         var.ui.menubarCrearBakup.triggered.connect(events.Eventos.Backup)
         var.ui.menubarRecuperarBackUp.triggered.connect(events.Eventos.restaurarBD)
+        var.ui.actionAbout.triggered.connect(events.Eventos.abrirAbout)
 
         for i in var.rbtsex:
             i.toggled.connect(clients.Clientes.selSexo)

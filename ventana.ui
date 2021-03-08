@@ -115,7 +115,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_11">
        <attribute name="title">
@@ -987,6 +987,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
                 </property>
                 <property name="font">
                  <font>
+                  <pointsize>10</pointsize>
                   <weight>75</weight>
                   <bold>true</bold>
                  </font>
@@ -1036,6 +1037,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
                 </property>
                 <property name="font">
                  <font>
+                  <pointsize>10</pointsize>
                   <weight>75</weight>
                   <bold>true</bold>
                  </font>
@@ -1058,6 +1060,9 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
                   <width>100</width>
                   <height>0</height>
                  </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(220, 255, 247);</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -1135,6 +1140,7 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
               </property>
               <property name="font">
                <font>
+                <pointsize>10</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -1155,6 +1161,9 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(220, 255, 247);</string>
+              </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
               </property>
@@ -1167,6 +1176,9 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(220, 255, 247);</string>
               </property>
              </widget>
             </item>
@@ -1492,6 +1504,9 @@ background-color: qlineargradient(spread:pad, x1:0.545, y1:0.482955, x2:0.534091
             <weight>75</weight>
             <bold>true</bold>
            </font>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(219, 255, 255);</string>

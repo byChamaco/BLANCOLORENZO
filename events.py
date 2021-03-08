@@ -205,23 +205,20 @@ class Eventos():
                 bbdd.close()
             conexion.Conexion.db_connect(var.filebd)
             conexion.Conexion.mostrarClientes(self)
-            conexion.Conexion.mostrarProductos(self)
+            conexion.Conexion.mostrarProducts(self)
             conexion.Conexion.mostrarFacturas(self)
             var.ui.lblstatus.setText('COPIA DE SEGURIDAD RESTAURADA')
         except Exception as error:
             print('Error restaurar base de datos: %s '  % str(error))
 
     def MercaEstadisticas(self):
-
         """
-
-            Modulo que carga los datos de un excel una base de datos
+            Modulo que carga los datos de un excel en una base de datos
 
             :return: none
             :rtype: none
-
         """
-        documento = xlrd.open_workbook("MercaEstatisticas.xls")
+        documento = xlrd.open_workbook("MercaEstadisticas.xls")
 
         productos = documento.sheet_by_index(0)
 
@@ -232,7 +229,7 @@ class Eventos():
 
             query = QtSql.QSqlQuery()
 
-            query.prepare('insert into productos (producto, precio, stock) values (:producto, :preciounidad, :stock)')
+            query.prepare('insert into productos (producto, precio, stock) values (:producto, :precio, :stock)')
             query.bindValue(':producto', str(nombre))
             query.bindValue(':precio', float(precio))
             query.bindValue(':stock', int(stock))

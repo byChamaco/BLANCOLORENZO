@@ -27,7 +27,7 @@ class Ui_dlgAbout(object):
         self.lblLogo = QtWidgets.QLabel(dlgAbout)
         self.lblLogo.setGeometry(QtCore.QRect(150, 20, 71, 61))
         self.lblLogo.setText("")
-        self.lblLogo.setPixmap(QtGui.QPixmap("../BESADAPEREZ/img/logo.jpg"))
+        self.lblLogo.setPixmap(QtGui.QPixmap("../BLANCOLORENZO/img/logo.jpg"))
         self.lblLogo.setScaledContents(True)
         self.lblLogo.setObjectName("lblLogo")
         self.lblNombre = QtWidgets.QLabel(dlgAbout)
