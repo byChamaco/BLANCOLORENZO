@@ -200,12 +200,12 @@ class Eventos():
             filename = var.filedlgabrir.getOpenFileName(None, 'Restaurar Copia de Seguridade','','*.zip;;All Files', options= option)
             if var.filedlgabrir.Accepted and filename != '':
                 file = filename[0]
-                with zipfile.ZipFile(str(file),'r') as bbdd:
+                with zipfile.ZipFile(str(file), 'r') as bbdd:
                     bbdd.extractall(pwd=None)
                 bbdd.close()
             conexion.Conexion.db_connect(var.filebd)
             conexion.Conexion.mostrarClientes(self)
-            conexion.Conexion.mostrarProducts(self)
+            conexion.Conexion.mostrarProducts()
             conexion.Conexion.mostrarFacturas(self)
             var.ui.lblstatus.setText('COPIA DE SEGURIDAD RESTAURADA')
         except Exception as error:
